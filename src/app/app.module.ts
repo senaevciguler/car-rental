@@ -1,3 +1,4 @@
+import { FooterComponent } from './footer/footer.component';
 import { CarService } from './service/car.service';
 import { CarComponent } from './car/car.component';
 import { CarListComponent } from './car-list/car-list.component';
@@ -22,6 +23,7 @@ import { HomeComponent } from './home/home.component';
     CarComponent,
     ErrorComponent,
     HomeComponent,
+    FooterComponent
     
   ],
   imports: [
