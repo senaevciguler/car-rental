@@ -1,7 +1,18 @@
+import { CarComponent } from './car/car.component';
+import { CarListComponent } from './car-list/car-list.component';
+import { HomeComponent } from './home/home.component';
+import { ErrorComponent } from './error/error.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+
+const routes: Routes = [
+  {path: '', component:HomeComponent},
+  {path:'cars', component:CarListComponent},
+  {path:'cars/:id', component:CarComponent},
+
+  {path:'**', component:ErrorComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,32 @@
+<h4>List Of Cars</h4> 
+
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+
+<div class="container">
+<table class="table">
+<thead>
+    <tr>
+        <th>Id</th>
+        <th>Model</th>
+        <th>Type</th>
+        <th>Mileage</th>
+        <th>Update</th>
+        <th>Delete</th>
+        
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor = " let car of cars">
+        <td>{{car.id}}</td>
+        <td>{{car.model}}</td>
+        <td>{{car.bodyType}}</td>
+        <td>{{car.mileage}}</td>
+        <td><button (click) ="updateCar(car.id)" class = "btn btn-success">Update</button></td>
+        <td><button (click) ="deleteCar(car.id)" class = "btn btn-warning">Delete</button></td>
+    </tr>
+</tbody>
+</table>
+<div class="row">
+    <button (click) ="addCar()" class = "btn btn-success">Add</button>
+</div>
+</div>

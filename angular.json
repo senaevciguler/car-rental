@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "honeymoney": {
+    "angular-employee-management-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/honeymoney",
+            "outputPath": "dist/angular-employee-management-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,7 +24,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -63,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "honeymoney:build"
+            "browserTarget": "angular-employee-management-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "honeymoney:build:production"
+              "browserTarget": "angular-employee-management-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "honeymoney:build"
+            "browserTarget": "angular-employee-management-app:build"
           }
         },
         "test": {
@@ -89,7 +88,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -112,19 +110,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "honeymoney:serve"
+            "devServerTarget": "angular-employee-management-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "honeymoney:serve:production"
+              "devServerTarget": "angular-employee-management-app:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "honeymoney",
+  "defaultProject": "angular-employee-management-app",
   "cli": {
-    "analytics": "e21a6b07-77c3-4ae5-b421-1bec0d6ca529"
+    "analytics": "99251b97-e04d-4ff9-a1d0-19a5cb09a2a8"
   }
 }
