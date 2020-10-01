@@ -26,9 +26,6 @@ export abstract class PaginationListComponent extends BaseComponent implements O
     this.refresh();
   }
 
-  
-
-
   public refresh() {
     console.log('test refresh pagination');
     merge(this.sort.sortChange, this.paginator.page)
@@ -47,7 +44,7 @@ export abstract class PaginationListComponent extends BaseComponent implements O
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
           this.resultsLength = data['payload']['totalElements'] || data['payload']['total_items'];
-          const result = data['payload']['content'] || data['payload']['items'];
+          const result = data['payload'] || data['payload']['items'];
           this.onDataLoaded(result);
           return result;
         }),

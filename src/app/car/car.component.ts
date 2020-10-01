@@ -1,55 +1,101 @@
-import { CarService } from './../service/car.service';
-import { Car} from '../model/car.module';
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Car } from '../model/car.module';
+import { CarService } from '../service/car.service';
+import { BaseComponent } from '../_base/base.component';
+import { Utility } from '../_base/utility';
 
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
-  styleUrls: ['./car.component.css']
+  styleUrls: ['./car.component.scss']
 })
-export class CarComponent implements OnInit {
-  id:number
-  car:Car
+export class CarComponent extends BaseComponent {
 
-  constructor(private carService:CarService,
+  carForm: FormGroup;
+  car: Car;
+  dataSource = [];
+  
+  constructor(
     private route: ActivatedRoute,
-    private router:Router
-) { }
+    private router:Router,
+    private carService:CarService) {
 
-  ngOnInit(): void {
-
-    this.id = this.route.snapshot.params['id']
-    this.car = new Car();
-
-    if(this.id != -1){
-      this.carService.retrieveCar(this.id)
-      .subscribe(
-      data => this.car = data
-      )
-    }
+    super();
   }
   
-  saveCar(){
-    if(this.id == -1){
-      this.carService.createCar(this.car)
-      .subscribe(
-          data =>{
-            console.log(data)
-            this.router.navigate(['cars'])
-          } 
-        
-      )
-    }else{
-      this.carService.updateCar(this.id,this.car)
-      .subscribe(
-            data =>{
-            console.log(data)
-            this.router.navigate(['cars'])
-          } 
-        
-      )
-    }
+  init() {
+    this.carForm = new FormGroup({
+      model: new FormControl(this.car.model, [
+        Validators.required,
+      ]),
+      bodyType: new FormControl(this.car.bodyType, [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(9)
+      ]),
+      color: new FormControl(this.car.color,[
+        Validators.required
+      ])
+    });
+
+    this.isComponentReady = true;
   }
 
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.route.params.subscribe(params => {
+    this.loadCar(params['id']);
+    });
+
+  }
+
+  ngAfterViewInit() {
+  }
+
+
+  actionSave(){
+    if (!this.carForm.valid) {
+      return;
+    }
+    
+    const model = this.carForm.value;
+    this.car.model = model.model;
+    this.car.bodyType = model.bodyType;
+    this.car.color = model.color;
+    
+    
+    if (Utility.isEmpty(this.car.id)) {
+      this.carService.createCar(this.car).subscribe(response => {
+        console.log(response)
+        if (Utility.isSuccess(response)) {
+          this.router.navigate(['/cars']);
+        }
+      });
+    } else {
+      this.carService.updateCar(this.car).subscribe(response => {
+        if (Utility.isSuccess(response)) {
+          this.router.navigate(['/cars']);
+        }
+      });
+    }
+  
+  }
+  
+    private loadCar(id: any) {
+      if (Utility.isEmpty(id)) {
+        this.car = new Car();
+        this.init();
+        return;
+      }
+      this.carService.retrieveCar(id).subscribe((response) => {
+        if (Utility.isSuccess(response)) {
+          this.car = Object.assign(new Car(), response['payload']);
+          this.init();
+        }
+      });
+  
+    }
+      
 }

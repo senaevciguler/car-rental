@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path:'cars', component:CarListComponent},
+  {path:'cars/definition', component:CarComponent},
   {path:'cars/definition/:id', component:CarComponent},
 
   {path:'**', component:ErrorComponent}

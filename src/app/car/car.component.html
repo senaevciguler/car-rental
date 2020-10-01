@@ -1,49 +1,84 @@
-
-<h1>Car</h1>
-
-<div class="container">
-
-    <div class="alert alert-warning" *ngIf="carForm.dirty && carForm.invalid">Enter valid values</div>
-
-    <form (ngSubmit)="!carForm.invalid && saveCar()" #carForm="ngForm">
-        <fieldset class="form-group">
-            <label>Model</label>
-            <input type ="text" #model ="ngModel" 
-            [(ngModel)] ="car.model" class ="form-control" 
-            name="model" required="required">
-        </fieldset>
-        
-        <fieldset class="form-group">
-            <label>Type</label>
-            <input type ="text" #bodyType ="ngModel" 
-            [(ngModel)] ="car.bodyType" class ="form-control" 
-            name="bodyType" required="required">
-        </fieldset>
-        
-        <fieldset class="form-group">
-            <label>Color</label>
-            <input type ="text" #color ="ngModel" 
-            [(ngModel)] ="car.color" class ="form-control" 
-            name="color" required="required">
-        </fieldset>
-
-        <fieldset class="form-group">
-            <label>Year</label>
-            <input type ="number" #year ="ngModel" 
-            [(ngModel)] ="car.year" class ="form-control" 
-            name="year" required="required">
-        </fieldset>
-
-        <fieldset class="form-group">
-            <label>Mileage</label>
-            <input type ="number" #mileage ="ngModel" 
-            [(ngModel)] ="car.mileage" class ="form-control" 
-            name="mileage" required="required">
-        </fieldset>
-
-       
-        <button type="submit" class="btn btn-success">Save</button>
-    </form>
-
-</div>
-
+<div class="example-container middle" *ngIf="isComponentReady">
+    <mat-card class="p-0">
+      <mat-card-title class="">
+        <div class="card-title-text">
+          Car
+        </div>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <mat-card-content>
+        <form
+          accessibleForm
+          [formGroup]="carForm"
+          class="hd-form"
+          (ngSubmit)="carForm.valid && actionSave()"
+        >
+          <div fxLayout="row wrap">
+            <div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
+              <div class="form-row">
+                <mat-form-field class="full-width">
+                  <input 
+                    matInput
+                    formControlName="model"
+                    placeholder="model"                  
+                    required/>
+                    <mat-error *ngIf="carForm.get('model').hasError('required')" >please enter your name</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-row">
+                <mat-form-field class="full-width">
+                  <input
+                    matInput
+                    formControlName="color"
+                    placeholder="color"
+                    minlength="6"
+                    maxlength="20"
+                    required
+                  />
+                  <mat-error *ngIf="carForm.get('color').hasError('required')" >please enter your color</mat-error>
+                  <mat-error *ngIf="carForm.get('color').hasError('minlength')" >your color should between 4-9 character</mat-error>
+                  <mat-error *ngIf="carForm.get('color').hasError('maxlength')" >your color should between 4-9 character</mat-error>           
+                </mat-form-field>
+              </div>
+              <div class="form-row">
+                <mat-form-field class="full-width">
+                  <input
+                    matInput
+                    formControlName="bodyType"
+                    placeholder="bodyType"
+                    minlength="6"
+                    maxlength="20"
+                    required
+                  />
+                  <mat-error *ngIf="carForm.get('bodyType').hasError('required')" >please enter your last name</mat-error>
+                </mat-form-field>
+              </div>             
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <mat-card-actions>
+            <div fxFlex="100" class="mt-1">
+              <button
+                mat-raised-button
+                type="submit"
+                animatedButton
+                color="primary"
+              >
+                {{ (car.id ? 'Update' : 'Save') }}
+              </button>
+              <button
+                mat-button
+                color="warn"
+                animatedButton
+                type="button"
+                routerLink="/cars"
+              >
+                {{'Cancel'}}
+              </button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

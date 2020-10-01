@@ -4,9 +4,7 @@ import { Car } from './../model/car.module';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { QueryParam } from '../_base/query.param';
-import {BaseService} from '../_base/base.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-
 
 
 @Injectable()
@@ -32,13 +30,11 @@ export class CarService {
   retrieveCar(id:any){
     return this.http.get<Car>(`${environment.apiURL}/cars/${id}`);
   }
-  updateCar(id,car){
-    return this.http.put(`${environment.apiURL}/cars/${id}`
-    ,car);
+  updateCar(model: Car){
+    return this.http.put(`${environment.apiURL}/cars/${model.id}`, model);
   }
-  createCar(car){
-    return this.http.post(`${environment.apiURL}/cars/`
-    ,car);
+  createCar(model: Car){
+    return this.http.post(`${environment.apiURL}/cars` ,model);
   }
   
 }

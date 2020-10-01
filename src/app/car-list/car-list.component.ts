@@ -31,8 +31,7 @@ export class CarListComponent extends PaginationListComponent {
   ngOnInit() {
     super.ngOnInit();
     this.carService.listCars(QueryParam.ALL).subscribe((response) => {
-      this.dataSource = response['payload']['content'];
-
+      this.dataSource = response['payload'];
     });
   }
 
@@ -65,14 +64,14 @@ export class CarListComponent extends PaginationListComponent {
 
   updateCar(id) {
     console.log(`update ${id}`)
-    this.router.navigate([`cars/${id}`])
+    this.router.navigate([`cars/definition/${id}`])
   }
 
   actionClear() {
     this.car = new Car();
   }
   addCar(){
-    this.router.navigate([`cars/definition`])
+    this.router.navigate(['cars/definition'])
   }
 
   /*

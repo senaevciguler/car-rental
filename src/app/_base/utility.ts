@@ -194,6 +194,7 @@ export class Utility {
   }
 
   static isSuccess(response: Object): boolean {
+    console.log(response);
     if (Utility.isEmpty(response['success'])) {
       console.warn('Could not find {success} property in response while checking success status');
     }
