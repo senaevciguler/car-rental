@@ -1,3 +1,44 @@
+
+
+<div class="example-container middle">
+    <button mat-button color="warn" (click) ="addCar()">Add</button>
+
+    <div class="example-table-container">
+        <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements" [class.isMobile]="isMobile">
+            <ng-container matColumnDef="model">
+                <mat-header-cell *matHeaderCellDef>Model</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <span class="mobile-label"></span>
+                    <div style="padding: 5px;">
+                        {{row.model}}
+                    </div>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-icon-button mat-sm-button color="primary" class="mr-1" (click)="updateCar(row.id)"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button mat-sm-button color="warn" (click)="deleteCar(row.id)"><mat-icon>delete</mat-icon></button>          
+                  </mat-cell>
+            </ng-container>   
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+        <mat-paginator #paginator
+        [length]="resultsLength"
+        [pageSize]="pageSize">
+        </mat-paginator>
+         
+</div>
+
+
+
+
+
+
+<!--
+
 <h4>List Of Cars</h4> 
 
 <div class="alert alert-success" *ngIf='message'>{{message}}</div>
@@ -30,3 +71,4 @@
     <button (click) ="addCar()" class = "btn btn-success">Add</button>
 </div>
 </div>
+-->

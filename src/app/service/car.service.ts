@@ -1,34 +1,43 @@
+import { environment } from './../../environments/environment';
+
 import { Car } from './../model/car.module';
-import{environment} from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { QueryParam } from '../_base/query.param';
+import {BaseService} from '../_base/base.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CarService {
+  private userSubject: BehaviorSubject<Car>;
+  public car: Observable<Car>;
 
 
-  constructor(private http:HttpClient) { }
+  constructor(protected http:HttpClient) {
+    
+   }
 
-  retrieveAllCars(){
-    return this.http.get<Car[]>(`${environment.baseURL}/cars`);
-   
+  listCars(qp?: QueryParam) {
+    qp = qp || new QueryParam();
+    return this.http.get<Car[]>(`${environment.apiURL}/cars`, {
+        params: qp.toURLSearchParams()
+    });
+}
+
+  deleteCar(id:any){
+    return this.http.delete(`${environment.apiURL}/cars/${id}`);
   }
-  deleteCar(id){
-    return this.http.delete(`${environment.baseURL}/cars/${id}`);
-  }
-  retrieveCar(id){
-    return this.http.get<Car>(`${environment.baseURL}/cars/${id}`);
+  retrieveCar(id:any){
+    return this.http.get<Car>(`${environment.apiURL}/cars/${id}`);
   }
   updateCar(id,car){
-    return this.http.put(`${environment.baseURL}/cars/${id}`
+    return this.http.put(`${environment.apiURL}/cars/${id}`
     ,car);
   }
   createCar(car){
-    return this.http.post(`${environment.baseURL}/cars/`
+    return this.http.post(`${environment.apiURL}/cars/`
     ,car);
   }
   

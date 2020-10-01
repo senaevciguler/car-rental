@@ -7,7 +7,7 @@ export const environment = {
   DefaultLanguage: 'en',
   development: true,
   environmentName: 'DEV',
-  baseURL: 'http://localhost:8080/api/v1'
+  apiURL: 'http://localhost:8080/api/v1'
 };
 
 /*
