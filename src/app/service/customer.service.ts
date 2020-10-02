@@ -29,7 +29,7 @@ export class CustomerService {
   updateCustomer(model: Customer){
     return this.http.put(`${environment.apiURL}/customers/${model.id}`, model);
   }
-  createCar(model: Customer){
+  createCustomer(model: Customer){
     return this.http.post(`${environment.apiURL}/customers` ,model);
   }
 

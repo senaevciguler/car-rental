@@ -22,7 +22,9 @@
                     formControlName="model"
                     placeholder="model"                  
                     required/>
-                    <mat-error *ngIf="carForm.get('model').hasError('required')" >please enter your name</mat-error>
+                    <mat-error *ngIf="carForm.get('model').hasError('required')" >please enter model</mat-error>
+                    <mat-error *ngIf="carForm.get('color').hasError('maxlength')" >model should between 1-10 character</mat-error> 
+
                 </mat-form-field>
               </div>
               <div class="form-row">
@@ -35,10 +37,8 @@
                     maxlength="20"
                     required
                   />
-                  <mat-error *ngIf="carForm.get('color').hasError('required')" >please enter your color</mat-error>
-                  <mat-error *ngIf="carForm.get('color').hasError('minlength')" >your color should between 4-9 character</mat-error>
-                  <mat-error *ngIf="carForm.get('color').hasError('maxlength')" >your color should between 4-9 character</mat-error>           
-                </mat-form-field>
+                  <mat-error *ngIf="carForm.get('color').hasError('required')" >please enter color</mat-error>
+                  </mat-form-field>
               </div>
               <div class="form-row">
                 <mat-form-field class="full-width">
@@ -50,7 +50,21 @@
                     maxlength="20"
                     required
                   />
-                  <mat-error *ngIf="carForm.get('bodyType').hasError('required')" >please enter your last name</mat-error>
+                  <mat-error *ngIf="carForm.get('bodyType').hasError('required')" >please enter body type</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-row">
+                <mat-form-field class="full-width">
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="year"
+                    placeholder="Year"
+                    minlength="6"
+                    maxlength="20"
+                    required
+                  />
+                  <mat-error *ngIf="carForm.get('year').hasError('required')" >please enter year of car</mat-error>
                 </mat-form-field>
               </div>
             </div>

@@ -1,3 +1,4 @@
+import { Office } from './office.module';
 export class Car{
     
       public id:number;
@@ -8,6 +9,9 @@ export class Car{
       public mileage:number;
       public availability: boolean;
       public imageLinks = [];
+      public office:Office[];
+      public checkInDate:Date;
+      public checkOutDate:Date;
       public photo = [];
 
 

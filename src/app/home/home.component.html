@@ -1,1 +1,65 @@
-<h3>Welcome To Our Car Rental Application</h3>
+<!--<div class="example-container middle">
+    <mat-card class="p-0">
+      <mat-card-title class="">
+        <div class="card-title-text">
+          Welcome Our Ren-Car Application
+        </div>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <mat-card-content>
+        <form
+          accessibleForm
+          [formGroup]="searchForm"
+          class="hd-form"
+          (ngSubmit)="searchForm.valid && actionSave()"
+        >
+          <div fxLayout="row wrap">
+            <div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
+                <div class="form-row">
+                    <mat-form-field appearance="outline">
+                      <mat-label translate>Rent Office</mat-label>
+                      <mat-select
+                        placeholder="Office"
+                        formControlName="office"
+                        required
+                      >
+                        <mat-option
+                          *ngFor="let office of dataSourceOffice"
+                          [value]="office.value"
+                        >
+                          {{ office.value }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>    
+                  <div class="form-row">
+                    <mat-form-field class="form-row-column">
+                      <input matInput [matDatepicker]="pickerCheckIn" placeholder="Check-in Date"
+                             autocomplete="off"
+                             [matDatepickerFilter]="checkInDateFilter"
+                             [min]="minDateOfCheckInDate"
+                             formControlName="checkInDate"
+                             name="checkInDate" required>
+                      <mat-datepicker-toggle matSuffix [for]="pickerCheckIn"></mat-datepicker-toggle>
+                      <mat-datepicker #pickerCheckIn [startAt]="startDate"></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="form-row-column">
+                      <input matInput [matDatepicker]="pickerCheckOut" placeholder="Check-out Date"
+                             autocomplete="off"
+                             [matDatepickerFilter]="checkOutDateFilter"
+                             formControlName="checkOutDate"
+                             name="checkOutDate" required>
+                      <mat-datepicker-toggle matSuffix [for]="pickerCheckOut"></mat-datepicker-toggle>
+                      <mat-datepicker #pickerCheckOut [startAt]="car.checkInDate"></mat-datepicker>
+                    </mat-form-field>
+                  </div>    
+          </div>
+          </div>
+          <mat-divider></mat-divider>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <button mat-button color="warn" size="bold"(click) ="searchAvaibleCar()">Search</button>
+  </div>
+-->
+  

@@ -37,6 +37,9 @@ export class CarComponent extends BaseComponent {
       ]),
       color: new FormControl(this.car.color,[
         Validators.required
+      ]),
+      year: new FormControl(this.car.year,[
+        Validators.required
       ])
     });
 
@@ -64,6 +67,7 @@ export class CarComponent extends BaseComponent {
     this.car.model = model.model;
     this.car.bodyType = model.bodyType;
     this.car.color = model.color;
+    this.car.year = model.year;
     
     
     if (Utility.isEmpty(this.car.id)) {
@@ -97,5 +101,7 @@ export class CarComponent extends BaseComponent {
       });
   
     }
+
+    
       
 }
