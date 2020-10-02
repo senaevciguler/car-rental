@@ -64,7 +64,6 @@ export class CarComponent extends BaseComponent {
       return;
     }
     
-    console.log(this.selectedFiles[0]);
     const model = this.carForm.value;
     this.car.model = model.model;
     this.car.bodyType = model.bodyType;
