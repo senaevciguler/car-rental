@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Car } from '../model/car.module';
-import { CarService } from '../service/car.service';
-import { BaseComponent } from '../_base/base.component';
-import { Utility } from '../_base/utility';
+import { Car } from 'src/app/model/car.module';
+import { CarService } from 'src/app/service/car.service';
+import { Utility } from 'src/app/_base/utility';
+import {BaseComponent} from '../../../_base/base.component';
 
 @Component({
   selector: 'app-car',

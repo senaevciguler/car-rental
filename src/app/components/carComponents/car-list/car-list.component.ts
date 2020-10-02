@@ -1,13 +1,13 @@
-import { CarService } from './../service/car.service';
-import { Car } from './../model/car.module';
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import{AppConfirmService} from '../service/app-confirm/app-confirm.service';
-import{AppLoaderService} from '../service/app-loader/app-loader.service';
-import{PaginationListComponent} from '../_base/pagination.list.component';
-import { QueryParam } from '../_base/query.param';
+import {PaginationListComponent} from '../../../_base/pagination.list.component';
+import { Car } from 'src/app/model/car.module';
+import { CarService } from 'src/app/service/car.service';
+import {AppConfirmService} from '../../../service/app-confirm/app-confirm.service';
+import{AppLoaderService} from '../../../service/app-loader/app-loader.service';
+import { QueryParam } from 'src/app/_base/query.param';
+
 
 
 @Component({

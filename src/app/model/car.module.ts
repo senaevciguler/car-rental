@@ -5,7 +5,14 @@ export class Car{
       public bodyType:string;
       public color:string;
       public year:number;
-      public mileage:number
-      public availability: boolean
+      public mileage:number;
+      public availability: boolean;
+      public imageLinks = [];
+      public photo = [];
+
+
+      initUploadFiles() {
+        this.photo = this.imageLinks.map(imageLink => imageLink.link);
+      }
     
   }

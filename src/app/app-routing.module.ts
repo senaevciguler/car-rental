@@ -1,5 +1,5 @@
-import { CarComponent } from './car/car.component';
-import { CarListComponent } from './car-list/car-list.component';
+import { CarComponent } from './components/carComponents/car/car.component';
+import { CarListComponent } from './components/carComponents/car-list/car-list.component';
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { NgModule } from '@angular/core';
