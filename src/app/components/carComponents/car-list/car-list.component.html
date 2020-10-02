@@ -1,8 +1,7 @@
 
 
 <div class="example-container middle">
-    <button mat-button color="warn" (click) ="addCar()">Add</button>
-
+   
     <div class="example-table-container">
         <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements" [class.isMobile]="isMobile">
             <ng-container matColumnDef="model">
@@ -11,6 +10,24 @@
                     <span class="mobile-label"></span>
                     <div style="padding: 5px;">
                         {{row.model}}
+                    </div>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="bodyType">
+                <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <span class="mobile-label"></span>
+                    <div style="padding: 5px;">
+                        {{row.bodyType}}
+                    </div>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="year">
+                <mat-header-cell *matHeaderCellDef>Year</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <span class="mobile-label"></span>
+                    <div style="padding: 5px;">
+                        {{row.year}}
                     </div>
                 </mat-cell>
             </ng-container>
@@ -29,6 +46,7 @@
         [length]="resultsLength"
         [pageSize]="pageSize">
         </mat-paginator>
+        <button mat-button color="warn" size="bold"(click) ="addCar()">Add</button>
          
 </div>
 

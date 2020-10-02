@@ -1,3 +1,5 @@
+import { EmployeeService } from './service/employee.service';
+import { CustomerService } from './service/customer.service';
 import { AppLoaderService } from './service/app-loader/app-loader.service';
 import { AppConfirmService } from './service/app-confirm/app-confirm.service';
 import { FooterComponent } from './footer/footer.component';
@@ -37,6 +39,10 @@ import {LayoutModule} from '@angular/cdk/layout';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CustomerComponent } from './components/customerComponents/customer/customer.component';
+import { CustomerListComponent } from './components/customerComponents/customer-list/customer-list.component';
+import { EmployeeComponent } from './components/employeeComponents/employee/employee.component';
+import { EmployeeListComponent } from './components/employeeComponents/employee-list/employee-list.component';
 
 
 
@@ -47,7 +53,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     CarComponent,
     ErrorComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    CustomerComponent,
+    CustomerListComponent,
+    EmployeeComponent,
+    EmployeeListComponent
     
   ],
   imports: [
@@ -86,7 +96,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDialogModule
 
   ],
-  providers: [CarService,AppConfirmService,AppLoaderService],
+  providers: [CarService,AppConfirmService,AppLoaderService,CustomerService,EmployeeService],
   exports: [RouterModule],
   bootstrap: [AppComponent]
 })

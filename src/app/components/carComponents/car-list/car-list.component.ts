@@ -19,7 +19,7 @@ export class CarListComponent extends PaginationListComponent {
   cars: Car[]
   car:Car = new Car();
   message:String
-  displayedColumns = ['model','actions'];
+  displayedColumns = ['model','bodyType','year','actions'];
   
   constructor(
     @Inject(CarService) private carService: CarService, private router:Router,
