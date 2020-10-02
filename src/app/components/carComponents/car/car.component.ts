@@ -16,6 +16,7 @@ export class CarComponent extends BaseComponent {
   carForm: FormGroup;
   car: Car;
   dataSource = [];
+  selectedFiles: any;
   
   constructor(
     private route: ActivatedRoute,
@@ -58,25 +59,37 @@ export class CarComponent extends BaseComponent {
   }
 
 
-  actionSave(){
+  actionSave() {
     if (!this.carForm.valid) {
       return;
     }
     
+    console.log(this.selectedFiles[0]);
     const model = this.carForm.value;
     this.car.model = model.model;
     this.car.bodyType = model.bodyType;
     this.car.color = model.color;
     this.car.year = model.year;
-    
-    
+    //this.car.photo = this.selectedFiles[0];
+
+    console.log(this.car);
     if (Utility.isEmpty(this.car.id)) {
       this.carService.createCar(this.car).subscribe(response => {
         console.log(response)
         if (Utility.isSuccess(response)) {
-          this.router.navigate(['/cars']);
+          this.carService.saveCarImage( response['payload'].id, this.selectedFiles[0]).subscribe(response => {
+            console.log(response)
+            if (Utility.isSuccess(response)) {
+              this.router.navigate(['/cars']);
+            }
+          });
+          //this.router.navigate(['/cars']);
         }
       });
+      
+      
+
+
     } else {
       this.carService.updateCar(this.car).subscribe(response => {
         if (Utility.isSuccess(response)) {
@@ -84,7 +97,6 @@ export class CarComponent extends BaseComponent {
         }
       });
     }
-  
   }
   
     private loadCar(id: any) {
@@ -102,6 +114,8 @@ export class CarComponent extends BaseComponent {
   
     }
 
-    
+    selectFile(event) {
+      this.selectedFiles = event.target.files;
+  }
       
 }

@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class CarService {
-  private userSubject: BehaviorSubject<Car>;
+  private carSubject: BehaviorSubject<Car>;
   public car: Observable<Car>;
 
 
@@ -35,6 +35,12 @@ export class CarService {
   }
   createCar(model: Car){
     return this.http.post(`${environment.apiURL}/cars` ,model);
+  }
+
+  saveCarImage(id: any, file){
+    const formData = new FormData();
+    formData.append('file',file, file.name);
+    return this.http.post(`${environment.apiURL}/cars/image/${id}`, formData);
   }
   
 }

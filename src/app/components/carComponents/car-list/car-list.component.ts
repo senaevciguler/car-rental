@@ -7,6 +7,7 @@ import { CarService } from 'src/app/service/car.service';
 import {AppConfirmService} from '../../../service/app-confirm/app-confirm.service';
 import{AppLoaderService} from '../../../service/app-loader/app-loader.service';
 import { QueryParam } from 'src/app/_base/query.param';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -19,11 +20,13 @@ export class CarListComponent extends PaginationListComponent {
   cars: Car[]
   car:Car = new Car();
   message:String
-  displayedColumns = ['model','bodyType','year','actions'];
+  displayedColumns = ['model','bodyType','year','actions','photo'];
   
   constructor(
     @Inject(CarService) private carService: CarService, private router:Router,
-    private snack: MatSnackBar,  private confirmService: AppConfirmService,
+    private snack: MatSnackBar,  
+    private confirmService: AppConfirmService,
+    private sanitizer:DomSanitizer,
     private loader: AppLoaderService) {
     super();
       }
@@ -73,6 +76,10 @@ export class CarListComponent extends PaginationListComponent {
   addCar(){
     this.router.navigate(['cars/definition'])
   }
+  
+  transform(photo){
+    return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+photo);
+}
 
   /*
   onStatusChange(value: any, row: any) {
