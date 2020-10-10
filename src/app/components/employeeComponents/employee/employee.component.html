@@ -1,1 +1,84 @@
-<p>employee works!</p>
+<div class="example-container middle" *ngIf="isComponentReady">
+    <mat-card class="p-0">
+      <mat-card-title class="">
+        <div class="card-title-text">
+          Employee
+        </div>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <mat-card-content>
+        <form
+          accessibleForm
+          [formGroup]="employeeForm"
+          class="hd-form"
+          (ngSubmit)="employeeForm.valid && actionSave()"
+        >
+          <div fxLayout="row wrap">
+            <div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
+                <div class="form-row">
+                    <mat-form-field class="full-width">
+                      <input
+                        matInput
+                        type="number"
+                        formControlName="employeeId"
+                        placeholder="Id"
+                        minlength="6"
+                        maxlength="20"
+                        required
+                      />
+                      <mat-error *ngIf="employeeForm.get('employeeId').hasError('required')" >please enter employeeId of cusomer</mat-error>
+                    </mat-form-field>
+                  </div>
+              <div class="form-row">
+                <mat-form-field class="full-width">
+                  <input 
+                    matInput
+                    formControlName="name"
+                    placeholder="name"                  
+                    required/>
+                    <mat-error *ngIf="employeeForm.get('name').hasError('required')" >please enter name</mat-error>
+
+                </mat-form-field>
+              </div>
+              <div class="form-row">
+                <mat-form-field class="full-width">
+                  <input
+                    matInput
+                    formControlName="lastName"
+                    placeholder="lastName"
+                    minlength="6"
+                    maxlength="20"
+                    required
+                  />
+                  <mat-error *ngIf="employeeForm.get('lastName').hasError('required')" >please enter lastName</mat-error>
+                  </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <mat-card-actions>
+            <div fxFlex="100" class="mt-1">
+              <button
+                mat-raised-button
+                type="submit"
+                animatedButton
+                lastName="primary"
+              >
+                {{ (employee.id ? 'Update' : 'Save') }}
+              </button>
+              <button
+                mat-button
+                lastName="warn"
+                animatedButton
+                type="button"
+                routerLink="/employees"
+              >
+                {{'Cancel'}}
+              </button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
