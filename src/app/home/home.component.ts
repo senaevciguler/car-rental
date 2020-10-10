@@ -1,3 +1,4 @@
+import { OfficeService } from './../service/office.service';
 import { Office } from './../model/office.module';
 import { CarService } from './../service/car.service';
 import { Car } from 'src/app/model/car.module';
@@ -21,47 +22,51 @@ import { BaseComponent } from '../_base/base.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent{
+export class HomeComponent  {
 
-  car: Car;
-  startDate = new Date();
+  offices: Office[];
+  office:Office = new Office();
   dataSourceOffice = [];
   searchForm: FormGroup;
-  minDateOfCheckInDate = new Date();
+  selected = [];
+
   
-  checkInDateFilter = (d: Date): boolean => {
-    return Utility.isEqualOrAfter(d, this.minDateOfCheckInDate);
-  }
-
-  checkOutDateFilter = (d: Date): boolean => {
-    return this.car.checkInDate && Utility.isAfter(d, this.car.checkInDate);
-  }
-
   constructor(
     private route: ActivatedRoute,
     private router:Router,
-    private carService:CarService) {
-
+    private officeService:OfficeService) {
+ 
   }
 
   init() {
     this.searchForm = new FormGroup({
-      office: new FormControl(this.car.office, [
-        Validators.required,
-      ]),
-      checkInDate: new FormControl(this.car.checkInDate, [
-        Validators.required,
-      ]),
-      checkOutDate: new FormControl(this.car.checkOutDate, [
+      name: new FormControl(this.office.name, [
         Validators.required,
       ])
     });
+
   }
 
   ngOnInit(): void {
+  
+    this.officeService.listOffices(QueryParam.ALL).subscribe((response) => {
+      this.dataSourceOffice = response['payload'];
+    });
+    this.searchForm = new FormGroup({
+      name: new FormControl(this.office.name, [
+        Validators.required,
+      ])
+    });
 
   }
 
+  getData(qp: QueryParam) {
+    return this.officeService.listOffices();
+  }
+
+  onOfficeChanged(roleUser: any) {
+    this.office.name = [this.office.name];
+  }
   ngAfterViewInit() {
   }
 
@@ -72,13 +77,29 @@ export class HomeComponent{
     }
     
     const model = this.searchForm.value;
-    this.car.office = model.office;
-    this.car.checkInDate = model.checkInDate;
-    this.car.checkInDate = model.checkInDate;
-      
+    this.office.name = model.name;
+    
+     this.router.navigate(['/cars'])
+  
   
   }
-  searchAvaibleCar(){
-    this.router.navigate(['cars'])
+
+  search(id){
+    /*
+
+    if(this.office.id === this.selected){
+
+      this.office.getCar
+    }
+    */
+    
+    this.router.navigate(['/avaibleCars'])
   }
+
+
+  public compareWith(object1: Office, object2:Office) {
+    return object1.id && object2.id && object1.name === object2.name;
+  }
+
+
 }

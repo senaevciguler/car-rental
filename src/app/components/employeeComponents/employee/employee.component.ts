@@ -32,8 +32,8 @@ export class EmployeeComponent extends BaseComponent {
       ]),
       lastName: new FormControl(this.employee.lastName, [
         Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(9)
+        Validators.minLength(3),
+        Validators.maxLength(20)
       ]),
       employeeId: new FormControl(this.employee.employeeId,[
         Validators.required

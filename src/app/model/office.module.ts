@@ -1,7 +1,11 @@
-export enum Office{
+import { Car } from './car.module';
+export class Office{
     
-TALLINN,
-TARTU,
-PÄRNU
+    public id:any;
+    public name: any[];
+    public cars?:Car[];
   
+    constructor(){
+        
+    }
 }

@@ -1,3 +1,5 @@
+import { ProfileDetailComponent } from './components/profileComponents/profile-detail/profile-detail.component';
+import { AvaibleCarListComponent } from './components/avaibleCarComponents/avaibleCar-list/avaibleCar-list.component';
 import { EmployeeComponent } from './components/employeeComponents/employee/employee.component';
 import { EmployeeListComponent } from './components/employeeComponents/employee-list/employee-list.component';
 import { CustomerComponent } from './components/customerComponents/customer/customer.component';
@@ -8,6 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { OfficeListComponent } from './components/officeComponents/office-list/office-list.component';
+import { OfficeComponent } from './components/officeComponents/office/office.component';
+import { ProfileComponent } from './components/profileComponents/profile/profile.component';
 
 
 const routes: Routes = [
@@ -21,6 +26,13 @@ const routes: Routes = [
   {path:'employees', component:EmployeeListComponent},
   {path:'employees/profile', component:EmployeeComponent},
   {path:'employees/profile/:id', component:EmployeeComponent},
+  {path:'offices', component:OfficeListComponent},
+  {path:'offices/profile', component:OfficeComponent},
+  {path:'offices/profile/:id', component:OfficeComponent},
+  {path:'avaibleCars', component:AvaibleCarListComponent},
+  {path:'profile', component:ProfileComponent},
+  {path:'profile/detail', component:ProfileDetailComponent},
+  {path:'profile/detail/:id', component:ProfileDetailComponent},
 
   {path:'**', component:ErrorComponent}
 ];

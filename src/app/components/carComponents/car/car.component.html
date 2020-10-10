@@ -31,9 +31,23 @@
                 <mat-form-field class="full-width">
                   <input
                     matInput
+                    type="number"
+                    formControlName="price"
+                    placeholder="Price"
+                    minlength="100"
+                    maxlength="200"
+                    required
+                  />
+                  <mat-error *ngIf="carForm.get('price').hasError('required')" >please enter price of car</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-row">
+                <mat-form-field class="full-width">
+                  <input
+                    matInput
                     formControlName="color"
                     placeholder="color"
-                    minlength="6"
+                    minlength="2"
                     maxlength="20"
                     required
                   />
@@ -46,7 +60,7 @@
                     matInput
                     formControlName="bodyType"
                     placeholder="bodyType"
-                    minlength="6"
+                    minlength="3"
                     maxlength="20"
                     required
                   />
@@ -60,11 +74,25 @@
                     type="number"
                     formControlName="year"
                     placeholder="Year"
-                    minlength="6"
-                    maxlength="20"
+                    minlength="4"
+                    maxlength="5"
                     required
                   />
                   <mat-error *ngIf="carForm.get('year').hasError('required')" >please enter year of car</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-row">
+                <mat-form-field class="full-width">
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="mileage"
+                    placeholder="Mileage"
+                    minlength="100"
+                    maxlength="200"
+                    required
+                  />
+                  <mat-error *ngIf="carForm.get('mileage').hasError('required')" >please enter mileage of car</mat-error>
                 </mat-form-field>
               </div>
              <div class="form-row">

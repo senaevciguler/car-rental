@@ -4,5 +4,6 @@ export class Customer{
     public name: string;
     public lastName:string;
     public customerId:number;
+    public photo = []; 
   
 }

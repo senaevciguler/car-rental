@@ -1,3 +1,4 @@
+import { Office } from './../model/office.module';
 import { environment } from './../../environments/environment';
 
 import { Car } from './../model/car.module';

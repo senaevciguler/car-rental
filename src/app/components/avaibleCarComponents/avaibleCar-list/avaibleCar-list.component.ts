@@ -10,16 +10,18 @@ import { QueryParam } from 'src/app/_base/query.param';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
+
 @Component({
-  selector: 'app-car-list',
-  templateUrl: './car-list.component.html',
-  styleUrls: ['./car-list.component.css']
+  selector: 'app-avaibleCar-list',
+  templateUrl: './avaibleCar-list.component.html',
+  styleUrls: ['./avaibleCar-list.component.css']
 })
-export class CarListComponent extends PaginationListComponent {
-  cars: Car[]
-  car:Car = new Car();
+export class AvaibleCarListComponent extends PaginationListComponent {
+  avaibleCars: Car[]
+  avaibleCar:Car = new Car();
   message:String
-  displayedColumns = ['model','price','bodyType','year','photo','actions'];
+  click: boolean = false;
+  displayedColumns = ['model','bodyType','year','actions','photo'];
   
   constructor(
     @Inject(CarService) private carService: CarService, private router:Router,
@@ -43,43 +45,24 @@ export class CarListComponent extends PaginationListComponent {
 
   getFilters(): Map<string, any> {
     return new Map()
-      .set('name', this.car.model);
-  }
-
-  deleteCar(id) {
-    this.confirmService.confirm({message: `Delete ${id}?`})
-      .subscribe(res => {
-        if (res) {
-          this.loader.open();
-          this.carService.deleteCar(id)
-          .subscribe(
-            response => {
-              console.log(response);
-              this.dataSource = this.cars;
-              this.loader.close();
-              this.refresh();
-            })
-        }
-      })
-  }
-
-
-  updateCar(id) {
-    console.log(`update ${id}`)
-    this.router.navigate([`cars/definition/${id}`])
+      .set('name', this.avaibleCar.model);
   }
 
   actionClear() {
-    this.car = new Car();
+    this.avaibleCar = new Car();
   }
-  addCar(){
-    this.router.navigate(['cars/definition'])
-  }
-  
-  
+
   transform(photo){
     return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+photo);
 }
-
+booking(id){  
+    this.confirmService.confirm({message: ` ${id} number of car booked for you ! 
+    Please Keep your car number for payment when you come our office to get your car! `})
+          this.loader.open()
+              this.loader.close();
+              this.click = !this.click;
+              this.refresh();
+  }
 
 }
+

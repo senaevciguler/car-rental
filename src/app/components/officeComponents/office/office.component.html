@@ -2,33 +2,19 @@
     <mat-card class="p-0">
       <mat-card-title class="">
         <div class="card-title-text">
-          Employee
+          Office
         </div>
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
         <form
           accessibleForm
-          [formGroup]="employeeForm"
+          [formGroup]="officeForm"
           class="hd-form"
-          (ngSubmit)="employeeForm.valid && actionSave()"
+          (ngSubmit)="officeForm.valid && actionSave()"
         >
           <div fxLayout="row wrap">
             <div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
-                <div class="form-row">
-                    <mat-form-field class="full-width">
-                      <input
-                        matInput
-                        type="number"
-                        formControlName="employeeId"
-                        placeholder="Id"
-                        minlength="6"
-                        maxlength="20"
-                        required
-                      />
-                      <mat-error *ngIf="employeeForm.get('employeeId').hasError('required')" >please enter employeeId of cusomer</mat-error>
-                    </mat-form-field>
-                  </div>
               <div class="form-row">
                 <mat-form-field class="full-width">
                   <input 
@@ -36,23 +22,31 @@
                     formControlName="name"
                     placeholder="name"                  
                     required/>
-                    <mat-error *ngIf="employeeForm.get('name').hasError('required')" >please enter name</mat-error>
+                    <mat-error *ngIf="officeForm.get('name').hasError('required')" >please enter name</mat-error>
 
                 </mat-form-field>
               </div>
               <div class="form-row">
-                <mat-form-field class="full-width">
-                  <input
-                    matInput
-                    formControlName="lastName"
-                    placeholder="Last Name"
-                    minlength="3"
-                    maxlength="20"
+                <mat-form-field appearance="fill">
+                  <mat-label translate>Cars</mat-label>
+                  <mat-select
+                    placeholder="Cars"
+                    formControlName="carsControl"
+                    [(value)]="selected"
+                    [compareWith]="compareWith"
+                    multiple
                     required
-                  />
-                  <mat-error *ngIf="employeeForm.get('lastName').hasError('required')" >please enter Last Name</mat-error>
-                  </mat-form-field>
+                  >
+                    <mat-option
+                      *ngFor="let cars of dataSourceCars"
+                      [value]="cars"
+                    >
+                      {{ cars.model   }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
+            
             </div>
           </div>
           <mat-divider></mat-divider>
@@ -64,14 +58,14 @@
                 animatedButton
                 lastName="primary"
               >
-                {{ (employee.id ? 'Update' : 'Save') }}
+                {{ (office.id ? 'Update' : 'Save') }}
               </button>
               <button
                 mat-button
                 lastName="warn"
                 animatedButton
                 type="button"
-                routerLink="/employees"
+                routerLink="/offices"
               >
                 {{'Cancel'}}
               </button>

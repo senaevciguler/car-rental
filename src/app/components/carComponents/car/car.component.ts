@@ -31,15 +31,21 @@ export class CarComponent extends BaseComponent {
       model: new FormControl(this.car.model, [
         Validators.required,
       ]),
+      price: new FormControl(this.car.price,[
+        Validators.required
+      ]),
       bodyType: new FormControl(this.car.bodyType, [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(3),
         Validators.maxLength(9)
       ]),
       color: new FormControl(this.car.color,[
         Validators.required
       ]),
       year: new FormControl(this.car.year,[
+        Validators.required
+      ]),
+      mileage: new FormControl(this.car.mileage,[
         Validators.required
       ])
     });
@@ -66,9 +72,11 @@ export class CarComponent extends BaseComponent {
     
     const model = this.carForm.value;
     this.car.model = model.model;
+    this.car.price = model.price;
     this.car.bodyType = model.bodyType;
     this.car.color = model.color;
     this.car.year = model.year;
+    this.car.mileage = model.mileage;
     //this.car.photo = this.selectedFiles[0];
 
     console.log(this.car);

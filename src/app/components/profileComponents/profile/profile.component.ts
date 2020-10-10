@@ -1,3 +1,5 @@
+import { CustomerService } from 'src/app/service/customer.service';
+import { Customer } from 'src/app/model/customer.model';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,19 +12,21 @@ import { QueryParam } from 'src/app/_base/query.param';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
+
 @Component({
-  selector: 'app-car-list',
-  templateUrl: './car-list.component.html',
-  styleUrls: ['./car-list.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class CarListComponent extends PaginationListComponent {
-  cars: Car[]
-  car:Car = new Car();
+export class ProfileComponent extends PaginationListComponent {
+  profiles: Customer[]
+  profile:Customer = new Customer();
   message:String
-  displayedColumns = ['model','price','bodyType','year','photo','actions'];
+  click: boolean = false;
+  displayedColumns = ['name','lastName','customerId','actions','photo'];
   
   constructor(
-    @Inject(CarService) private carService: CarService, private router:Router,
+    @Inject(CarService) private customerService: CustomerService, private router:Router,
     private snack: MatSnackBar,  
     private confirmService: AppConfirmService,
     private sanitizer:DomSanitizer,
@@ -32,54 +36,31 @@ export class CarListComponent extends PaginationListComponent {
 
   ngOnInit() {
     super.ngOnInit();
-    this.carService.listCars(QueryParam.ALL).subscribe((response) => {
+    this.customerService.listCustomers(QueryParam.ALL).subscribe((response) => {
       this.dataSource = response['payload'];
     });
   }
 
   getData(qp: QueryParam) {
-    return this.carService.listCars(qp);
+    return this.customerService.listCustomers(qp);
   }
 
   getFilters(): Map<string, any> {
     return new Map()
-      .set('name', this.car.model);
-  }
-
-  deleteCar(id) {
-    this.confirmService.confirm({message: `Delete ${id}?`})
-      .subscribe(res => {
-        if (res) {
-          this.loader.open();
-          this.carService.deleteCar(id)
-          .subscribe(
-            response => {
-              console.log(response);
-              this.dataSource = this.cars;
-              this.loader.close();
-              this.refresh();
-            })
-        }
-      })
-  }
-
-
-  updateCar(id) {
-    console.log(`update ${id}`)
-    this.router.navigate([`cars/definition/${id}`])
+      .set('name', this.profile.name);
   }
 
   actionClear() {
-    this.car = new Car();
+    this.profile = new Customer();
   }
-  addCar(){
-    this.router.navigate(['cars/definition'])
-  }
-  
-  
+
   transform(photo){
     return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+photo);
 }
-
+updateProfile(){
+  this.router.navigate(['/profile/detail']);
 
 }
+
+}
+

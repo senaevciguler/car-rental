@@ -1,3 +1,5 @@
+import { AvaibleCarListComponent } from './components/avaibleCarComponents/avaibleCar-list/avaibleCar-list.component';
+import { OfficeService } from './service/office.service';
 import { EmployeeService } from './service/employee.service';
 import { CustomerService } from './service/customer.service';
 import { AppLoaderService } from './service/app-loader/app-loader.service';
@@ -43,6 +45,10 @@ import { CustomerComponent } from './components/customerComponents/customer/cust
 import { CustomerListComponent } from './components/customerComponents/customer-list/customer-list.component';
 import { EmployeeComponent } from './components/employeeComponents/employee/employee.component';
 import { EmployeeListComponent } from './components/employeeComponents/employee-list/employee-list.component';
+import {OfficeComponent} from './components/officeComponents/office/office.component';
+import {OfficeListComponent} from './components/officeComponents/office-list/office-list.component';
+import { ProfileDetailComponent } from './components/profileComponents/profile-detail/profile-detail.component';
+import {ProfileComponent} from './components/profileComponents/profile/profile.component';
 
 
 
@@ -57,7 +63,12 @@ import { EmployeeListComponent } from './components/employeeComponents/employee-
     CustomerComponent,
     CustomerListComponent,
     EmployeeComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    OfficeComponent,
+    OfficeListComponent,
+    AvaibleCarListComponent,
+    ProfileComponent,
+    ProfileDetailComponent
     
   ],
   imports: [
@@ -96,7 +107,7 @@ import { EmployeeListComponent } from './components/employeeComponents/employee-
     MatDialogModule
 
   ],
-  providers: [CarService,AppConfirmService,AppLoaderService,CustomerService,EmployeeService],
+  providers: [CarService,AppConfirmService,AppLoaderService,CustomerService,EmployeeService,OfficeService],
   exports: [RouterModule],
   bootstrap: [AppComponent]
 })

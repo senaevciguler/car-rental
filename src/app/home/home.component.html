@@ -1,55 +1,55 @@
 
+<div class="example-container middle">
+  <mat-card class="p-0">
+    <mat-card-title class="">
+      <div class="card-title-text" >
+        Search
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <mat-card-content >
+      <form
+        accessibleForm
+        [formGroup]="searchForm"
+        class="hd-form"
+        (ngSubmit)="searchForm.valid && actionSave()"
+      >
+        <div fxLayout="row wrap">
+          <div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<div class="example-container middle">
-    <mat-card class="p-0">
-      <mat-card-title class="">
-        <div class="card-title-text">
-          Welcome Our Ren-Car Application
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label translate>Office</mat-label>
+                <mat-select
+                  placeholder="Office"
+                  formControlName="name"
+                  [(value)]="selected"
+                  [compareWith]="compareWith"
+                  multiple
+                  required
+                >
+                  <mat-option
+                    *ngFor="let office of dataSourceOffice"
+                    [value]="office"
+                  >
+                    {{ office.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
         </div>
-        <mat-divider></mat-divider>
-      </mat-card-title>
-      <mat-card-content>
-        <form
-          accessibleForm
-          [formGroup]="searchForm"
-          class="hd-form"
-          (ngSubmit)="searchForm.valid && actionSave()"
-        >
-          <div fxLayout="row wrap">
-            <div fxFlex="100" fxFlex.gt-xs="50" class="pr-1">
-                <div class="form-row">
-                    <mat-form-field appearance="outline">
-                      <mat-label translate>Rent Office</mat-label>
-                      <mat-select
-                        placeholder="Office"
-                        formControlName="office"
-                        required
-                      >
-                        <mat-option
-                          *ngFor="let office of dataSourceOffice"
-                          [value]="office.value"
-                        >
-                          {{ office.value }}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>    
+      </form>
+        </mat-card-content>
+    <button mat-button type="submit" color="accent" (click)="search(office.id)">Search</button>
+  </mat-card>
+</div>
+
+       
+
+
+<!--
+
                   <div class="form-row">
                     <mat-form-field class="form-row-column">
                       <input matInput [matDatepicker]="pickerCheckIn" placeholder="Check-in Date"

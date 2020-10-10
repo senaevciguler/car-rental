@@ -32,8 +32,8 @@ export class CustomerComponent extends BaseComponent {
       ]),
       lastName: new FormControl(this.customer.lastName, [
         Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(9)
+        Validators.minLength(3),
+        Validators.maxLength(20)
       ]),
       customerId: new FormControl(this.customer.customerId,[
         Validators.required

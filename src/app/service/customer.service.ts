@@ -33,4 +33,10 @@ export class CustomerService {
     return this.http.post(`${environment.apiURL}/customers` ,model);
   }
 
+  saveCustomerImage(id: any, file){
+    const formData = new FormData();
+    formData.append('file',file, file.name);
+    return this.http.post(`${environment.apiURL}/customers/image/${id}`, formData);
+  }
+
 }
