@@ -1,3 +1,4 @@
+import { BookingComponent } from './components/bookingComponents/booking/booking.component';
 import { ProfileDetailComponent } from './components/profileComponents/profile-detail/profile-detail.component';
 import { AvaibleCarListComponent } from './components/avaibleCarComponents/avaibleCar-list/avaibleCar-list.component';
 import { EmployeeComponent } from './components/employeeComponents/employee/employee.component';
@@ -13,6 +14,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OfficeListComponent } from './components/officeComponents/office-list/office-list.component';
 import { OfficeComponent } from './components/officeComponents/office/office.component';
 import { ProfileComponent } from './components/profileComponents/profile/profile.component';
+import {BookingDetailComponent} from './components/bookingComponents/booking-detail/booking-detail.component'
 
 
 const routes: Routes = [
@@ -33,6 +35,9 @@ const routes: Routes = [
   {path:'profile', component:ProfileComponent},
   {path:'profile/detail', component:ProfileDetailComponent},
   {path:'profile/detail/:id', component:ProfileDetailComponent},
+ 
+  {path:'booking/detail/:id', component:BookingDetailComponent},
+  {path:'booking', component:BookingComponent},
 
   {path:'**', component:ErrorComponent}
 ];

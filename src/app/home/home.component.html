@@ -1,5 +1,5 @@
 
-<div class="example-container middle">
+<div class="example-container middle" *ngIf="isComponentReady">
   <mat-card class="p-0">
     <mat-card-title class="">
       <div class="card-title-text" >
@@ -22,10 +22,7 @@
                 <mat-label translate>Office</mat-label>
                 <mat-select
                   placeholder="Office"
-                  formControlName="name"
-                  [(value)]="selected"
-                  [compareWith]="compareWith"
-                  multiple
+                  formControlName="office"
                   required
                 >
                   <mat-option
@@ -37,47 +34,33 @@
                 </mat-select>
               </mat-form-field>
             </div>
+            <div class="form-row">
+
+              <mat-form-field appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker"
+                formControlName="checkInDate"
+                required
+                >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker [dateClass]="dateClass" #picker [startAt]="startDate"></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="pickerCheckOut"
+                formControlName="checkOutDate"
+                required
+                >
+                <mat-datepicker-toggle matSuffix [for]="pickerCheckOut"></mat-datepicker-toggle>
+                <mat-datepicker #pickerCheckOut  [dateClass]="dateClass" [startAt]="booking.checkInDate"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            
           </div>
         </div>
       </form>
         </mat-card-content>
-    <button mat-button type="submit" color="accent" (click)="search(office.id)">Search</button>
+    <button mat-button type="submit" color="accent" (click)="search()">Search</button>
   </mat-card>
 </div>
-
-       
-
-
-<!--
-
-                  <div class="form-row">
-                    <mat-form-field class="form-row-column">
-                      <input matInput [matDatepicker]="pickerCheckIn" placeholder="Check-in Date"
-                             autocomplete="off"
-                             [matDatepickerFilter]="checkInDateFilter"
-                             [min]="minDateOfCheckInDate"
-                             formControlName="checkInDate"
-                             name="checkInDate" required>
-                      <mat-datepicker-toggle matSuffix [for]="pickerCheckIn"></mat-datepicker-toggle>
-                      <mat-datepicker #pickerCheckIn [startAt]="startDate"></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field class="form-row-column">
-                      <input matInput [matDatepicker]="pickerCheckOut" placeholder="Check-out Date"
-                             autocomplete="off"
-                             [matDatepickerFilter]="checkOutDateFilter"
-                             formControlName="checkOutDate"
-                             name="checkOutDate" required>
-                      <mat-datepicker-toggle matSuffix [for]="pickerCheckOut"></mat-datepicker-toggle>
-                      <mat-datepicker #pickerCheckOut [startAt]="car.checkInDate"></mat-datepicker>
-                    </mat-form-field>
-                  </div>    
-          </div>
-          </div>
-          <mat-divider></mat-divider>
-        </form>
-      </mat-card-content>
-    </mat-card>
-    <button mat-button color="warn" size="bold"(click) ="searchAvaibleCar()">Search</button>
-  </div>
--->
-  

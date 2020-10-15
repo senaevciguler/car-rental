@@ -44,6 +44,7 @@ export class OfficeComponent extends BaseComponent {
     this.isComponentReady = true;
   }
 
+  
   ngOnInit(): void {
     super.ngOnInit();
     this.route.params.subscribe(params => {

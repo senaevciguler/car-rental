@@ -1,3 +1,4 @@
+import { BookingService } from './service/booking.service.';
 import { AvaibleCarListComponent } from './components/avaibleCarComponents/avaibleCar-list/avaibleCar-list.component';
 import { OfficeService } from './service/office.service';
 import { EmployeeService } from './service/employee.service';
@@ -40,7 +41,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import {LayoutModule} from '@angular/cdk/layout';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CustomerComponent } from './components/customerComponents/customer/customer.component';
 import { CustomerListComponent } from './components/customerComponents/customer-list/customer-list.component';
 import { EmployeeComponent } from './components/employeeComponents/employee/employee.component';
@@ -49,6 +50,12 @@ import {OfficeComponent} from './components/officeComponents/office/office.compo
 import {OfficeListComponent} from './components/officeComponents/office-list/office-list.component';
 import { ProfileDetailComponent } from './components/profileComponents/profile-detail/profile-detail.component';
 import {ProfileComponent} from './components/profileComponents/profile/profile.component';
+import { BookingDetailComponent } from './components/bookingComponents/booking-detail/booking-detail.component';
+import { BookingComponent } from './components/bookingComponents/booking/booking.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+
+
 
 
 
@@ -68,8 +75,12 @@ import {ProfileComponent} from './components/profileComponents/profile/profile.c
     OfficeListComponent,
     AvaibleCarListComponent,
     ProfileComponent,
-    ProfileDetailComponent
+    ProfileDetailComponent,
+    BookingDetailComponent,
+    BookingComponent,
     
+    
+     
   ],
   imports: [
     BrowserModule,
@@ -104,10 +115,13 @@ import {ProfileComponent} from './components/profileComponents/profile/profile.c
     MatInputModule,
     MatNativeDateModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatNativeDateModule,
+    MatDatepickerModule
 
   ],
-  providers: [CarService,AppConfirmService,AppLoaderService,CustomerService,EmployeeService,OfficeService],
+  providers: [CarService,AppConfirmService,AppLoaderService,CustomerService,EmployeeService,OfficeService,BookingService,  
+     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   exports: [RouterModule],
   bootstrap: [AppComponent]
 })

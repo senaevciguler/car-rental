@@ -22,7 +22,9 @@
     "@angular/platform-browser-dynamic": "~10.0.6",
     "@angular/router": "~10.0.6",
     "@material/checkbox": "^7.0.0",
+    "angular-mat-datepicker": "0.0.2",
     "bootstrap": "^4.5.2",
+    "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

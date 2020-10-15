@@ -1,3 +1,4 @@
+import { BookingService } from './../service/booking.service.';
 import { OfficeService } from './../service/office.service';
 import { Office } from './../model/office.module';
 import { CarService } from './../service/car.service';
@@ -16,47 +17,53 @@ import { AppConfirmService } from '../service/app-confirm/app-confirm.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppLoaderService } from '../service/app-loader/app-loader.service';
 import { BaseComponent } from '../_base/base.component';
+import { Booking } from '../model/booking.model';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-home-component',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent  {
+export class HomeComponent  extends BaseComponent {
 
-  offices: Office[];
-  office:Office = new Office();
   dataSourceOffice = [];
   searchForm: FormGroup;
-  selected = [];
+  selected;
+  booking: Booking;
+  startDate = new Date();
 
-  
   constructor(
     private route: ActivatedRoute,
     private router:Router,
-    private officeService:OfficeService) {
- 
+    private officeService:OfficeService,
+    private bookingService:BookingService) {
+      super();
   }
 
   init() {
     this.searchForm = new FormGroup({
-      name: new FormControl(this.office.name, [
+      office: new FormControl(this.booking.offices, [
         Validators.required,
-      ])
+      ]),
+       checkInDate: new FormControl(this.booking.checkInDate,[
+        Validators.required,
+      ]),
+      checkOutDate: new FormControl(this.booking.checkOutDate,[
+        Validators.required,
+      ]),
     });
-
+    this.isComponentReady = true;
   }
 
   ngOnInit(): void {
-  
+    super.ngOnInit();
+    this.route.params.subscribe(params => {
+    this.loadBooking(params['id']);
     this.officeService.listOffices(QueryParam.ALL).subscribe((response) => {
       this.dataSourceOffice = response['payload'];
     });
-    this.searchForm = new FormGroup({
-      name: new FormControl(this.office.name, [
-        Validators.required,
-      ])
-    });
+  });
 
   }
 
@@ -64,8 +71,9 @@ export class HomeComponent  {
     return this.officeService.listOffices();
   }
 
-  onOfficeChanged(roleUser: any) {
-    this.office.name = [this.office.name];
+  onOfficeChanged(office: any) {
+    console.log('testtttttt'+office.value);
+    this.booking.offices = office.value;
   }
   ngAfterViewInit() {
   }
@@ -77,24 +85,35 @@ export class HomeComponent  {
     }
     
     const model = this.searchForm.value;
-    this.office.name = model.name;
+    this.booking.offices = model.office;
+    this.booking.checkInDate = model.checkInDate;
+    this.booking.checkOutDate = model.checkOutDate;
     
      this.router.navigate(['/cars'])
   
   
   }
 
-  search(id){
-    /*
-
-    if(this.office.id === this.selected){
-
-      this.office.getCar
+  private loadBooking(id: any) {
+    if (Utility.isEmpty(id)) {
+      this.booking = new Booking();
+      this.init();
+      return;
     }
-    */
-    
-    this.router.navigate(['/avaibleCars'])
+    this.bookingService.retrieveBooking(id).subscribe((response) => {
+      if (Utility.isSuccess(response)) {
+        this.booking = Object.assign(new Booking(), response['payload']);
+        this.selected = this.booking.offices;
+        console.log(this.selected);
+        this.init();
+      }
+    });
+
   }
+  search(){
+    console.log(this.selected);
+    this.router.navigate(['/avaibleCars'], { queryParams: { office: this.selected } });
+}
 
 
   public compareWith(object1: Office, object2:Office) {
