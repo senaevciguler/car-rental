@@ -9,7 +9,6 @@ import {AppConfirmService} from '../../../service/app-confirm/app-confirm.servic
 import{AppLoaderService} from '../../../service/app-loader/app-loader.service';
 import { QueryParam } from 'src/app/_base/query.param';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Car } from 'src/app/model/car.module';
 import { Utility } from 'src/app/_base/utility';
 
 
@@ -24,6 +23,9 @@ export class AvaibleCarListComponent extends PaginationListComponent {
   book: Booking = new Booking();
   message:String
   click: boolean = false;
+  public checkInDate:Date;
+  public checkOutDate:Date;
+  public officeName = "";
 
 
   //model = this.book.car.model;
@@ -43,24 +45,27 @@ export class AvaibleCarListComponent extends PaginationListComponent {
 
   ngOnInit() {
     super.ngOnInit();
+    this.route.queryParams.subscribe(params => {
+      this.officeName = params['office'];
+      this.checkInDate = params['checkInDate'];  
+      this.checkOutDate = params['checkOutDate'];  
+    });
     this.route.params.subscribe(params => {
     this.loadBooking(params['id']);
-    this.carService.listCars(QueryParam.ALL).subscribe((response) => {
+
+    this.carService.availableCars(QueryParam.ALL, this.officeName, this.checkInDate, this.checkOutDate).subscribe((response) => {
       this.dataSource = response['payload'];
     });
-   
-
     });
     
   }
 
   getData(qp: QueryParam) {
-    return this.carService.listCars(qp);
+    return  this.carService.availableCars(QueryParam.ALL, this.officeName, this.checkInDate, this.checkOutDate);
   }
 
   getFilters(): Map<string, any> {
-    return new Map()
-      .set('name', this.book.car.model);
+    return new Map();
   }
 
   private loadBooking(id: any) {
@@ -83,18 +88,17 @@ export class AvaibleCarListComponent extends PaginationListComponent {
   transform(photo){
     return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+photo);
 }
-booking(id){  
- 
-  //const model = this.book.car;
-  
+booking(id){
+  this.book.car = id;
+  //this.book.office = this.officeName;
+  this.book.checkInDate = this.checkInDate;
+  this.book.checkOutDate = this.checkOutDate;
 
   this.bookingService.createBooking(this.book).subscribe(response => {
     if (Utility.isSuccess(response)) {
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/cars']);
     }
   });
-  //this.router.navigate([`booking/detail/${id}`])
   }
-
 }
 

@@ -19,48 +19,14 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent extends PaginationListComponent {
-  profiles: Customer[]
-  profile:Customer = new Customer();
-  message:String
-  click: boolean = false;
-  displayedColumns = ['name','lastName','customerId','actions','photo'];
-  
-  constructor(
-    @Inject(CarService) private customerService: CustomerService, private router:Router,
-    private snack: MatSnackBar,  
-    private confirmService: AppConfirmService,
-    private sanitizer:DomSanitizer,
-    private loader: AppLoaderService) {
-    super();
-      }
-
-  ngOnInit() {
-    super.ngOnInit();
-    this.customerService.listCustomers(QueryParam.ALL).subscribe((response) => {
-      this.dataSource = response['payload'];
-    });
-  }
-
   getData(qp: QueryParam) {
-    return this.customerService.listCustomers(qp);
+    throw new Error('Method not implemented.');
   }
-
   getFilters(): Map<string, any> {
-    return new Map()
-      .set('name', this.profile.name);
+    throw new Error('Method not implemented.');
   }
 
-  actionClear() {
-    this.profile = new Customer();
-  }
-
-  transform(photo){
-    return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+photo);
-}
-updateProfile(){
-  this.router.navigate(['/profile/detail']);
-
 }
 
-}
+
 

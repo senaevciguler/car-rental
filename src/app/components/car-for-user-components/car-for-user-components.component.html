@@ -1,0 +1,48 @@
+<div class="example-container middle">
+   
+    <div class="example-table-container">
+
+        
+
+        <mat-grid-list cols="2" rowHeight="500px">
+            <mat-grid-tile *ngFor="let item of dataSource" [style.background]="lightblue" 
+                style="width:100%;height:90vh"
+                class="ag-theme-balham"
+                [gridOptions]="gridOptions"
+                [columnDefs]="columnDefs"
+                (gridReady)="onGridReady($event)">
+
+
+                <mat-card class="example-card">
+                    <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title>{{item.model}}</mat-card-title>
+                      <mat-card-subtitle>{{item.bodyType}}  /  {{item.year}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img [src]="transform(item.photo)" height="250" width="470">
+                    <mat-card-content>
+                      <h3>
+                        {{item.price}} £/ hour
+                      </h3>
+                      <h4>
+                        {{item.color}}
+                      </h4>
+                      <h4>
+                        {{item.mileage}} KM
+                      </h4>
+            
+                    </mat-card-content>
+                    <mat-card-actions>
+                      <button mat-button type="submit" color="warn"  id="submit" (click)="booking(item.id)" [disabled] = "click"><mat-icon>BOOK</mat-icon></button>
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+                  </mat-card-actions>
+                  </mat-card>  
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+        <mat-paginator #paginator
+        [length]="resultsLength"
+        [pageSize]="pageSize">
+        </mat-paginator>
+         
+</div>

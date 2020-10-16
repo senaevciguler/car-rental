@@ -53,6 +53,7 @@ import {ProfileComponent} from './components/profileComponents/profile/profile.c
 import { BookingDetailComponent } from './components/bookingComponents/booking-detail/booking-detail.component';
 import { BookingComponent } from './components/bookingComponents/booking/booking.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { CarForUserComponentsComponent } from './components/car-for-user-components/car-for-user-components.component';
 
 
 
@@ -78,6 +79,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     ProfileDetailComponent,
     BookingDetailComponent,
     BookingComponent,
+    CarForUserComponentsComponent,
     
     
      

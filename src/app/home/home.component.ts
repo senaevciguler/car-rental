@@ -1,24 +1,13 @@
+
 import { BookingService } from './../service/booking.service.';
 import { OfficeService } from './../service/office.service';
-import { Office } from './../model/office.module';
-import { CarService } from './../service/car.service';
-import { Car } from 'src/app/model/car.module';
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
-import {DatePipe} from '@angular/common';
-import { PaginationListComponent } from '../_base/pagination.list.component';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { QueryParam } from '../_base/query.param';
 import { Utility } from '../_base/utility';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppConfirmService } from '../service/app-confirm/app-confirm.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AppLoaderService } from '../service/app-loader/app-loader.service';
 import { BaseComponent } from '../_base/base.component';
 import { Booking } from '../model/booking.model';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-home-component',
@@ -29,7 +18,7 @@ export class HomeComponent  extends BaseComponent {
 
   dataSourceOffice = [];
   searchForm: FormGroup;
-  selected;
+  selected = [];
   booking: Booking;
   startDate = new Date();
 
@@ -43,7 +32,7 @@ export class HomeComponent  extends BaseComponent {
 
   init() {
     this.searchForm = new FormGroup({
-      office: new FormControl(this.booking.offices, [
+      office: new FormControl(this.booking.office, [
         Validators.required,
       ]),
        checkInDate: new FormControl(this.booking.checkInDate,[
@@ -71,10 +60,6 @@ export class HomeComponent  extends BaseComponent {
     return this.officeService.listOffices();
   }
 
-  onOfficeChanged(office: any) {
-    console.log('testtttttt'+office.value);
-    this.booking.offices = office.value;
-  }
   ngAfterViewInit() {
   }
 
@@ -85,13 +70,11 @@ export class HomeComponent  extends BaseComponent {
     }
     
     const model = this.searchForm.value;
-    this.booking.offices = model.office;
+    this.booking.office = model.office;
     this.booking.checkInDate = model.checkInDate;
     this.booking.checkOutDate = model.checkOutDate;
     
      this.router.navigate(['/cars'])
-  
-  
   }
 
   private loadBooking(id: any) {
@@ -100,25 +83,13 @@ export class HomeComponent  extends BaseComponent {
       this.init();
       return;
     }
-    this.bookingService.retrieveBooking(id).subscribe((response) => {
-      if (Utility.isSuccess(response)) {
-        this.booking = Object.assign(new Booking(), response['payload']);
-        this.selected = this.booking.offices;
-        console.log(this.selected);
-        this.init();
-      }
-    });
-
   }
+
   search(){
-    console.log(this.selected);
-    this.router.navigate(['/avaibleCars'], { queryParams: { office: this.selected } });
-}
-
-
-  public compareWith(object1: Office, object2:Office) {
-    return object1.id && object2.id && object1.name === object2.name;
+    const model = this.searchForm.value;
+    this.router.navigate(['/avaibleCars'], 
+    { queryParams: { office: model.office.name, 
+      checkInDate: model.checkInDate.toISOString(),
+      checkOutDate:  model.checkOutDate.toISOString()}});
   }
-
-
 }

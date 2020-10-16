@@ -23,7 +23,17 @@ export class CarService {
     return this.http.get<Car[]>(`${environment.apiURL}/cars`, {
         params: qp.toURLSearchParams()
     });
-}
+  }
+
+  availableCars(qp: QueryParam, office: String, checkInDate: Date, checkOutDate: Date) {
+    qp = qp || new QueryParam();
+    qp.addFilter( 'office', office);
+    qp.addFilter( 'checkInDate', checkInDate);
+    qp.addFilter( 'checkOutDate', checkOutDate);
+    return this.http.get<Car[]>(`${environment.apiURL}/cars/available`, {
+        params: qp.toURLSearchParams() 
+    });
+  }
 
   deleteCar(id:any){
     return this.http.delete(`${environment.apiURL}/cars/${id}`);

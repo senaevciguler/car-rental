@@ -15,6 +15,7 @@ import { OfficeListComponent } from './components/officeComponents/office-list/o
 import { OfficeComponent } from './components/officeComponents/office/office.component';
 import { ProfileComponent } from './components/profileComponents/profile/profile.component';
 import {BookingDetailComponent} from './components/bookingComponents/booking-detail/booking-detail.component'
+import { CarForUserComponentsComponent } from './components/car-for-user-components/car-for-user-components.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,8 @@ const routes: Routes = [
  
   {path:'booking/detail/:id', component:BookingDetailComponent},
   {path:'booking', component:BookingComponent},
+  {path:'showCar', component:CarForUserComponentsComponent},
+ 
 
   {path:'**', component:ErrorComponent}
 ];
