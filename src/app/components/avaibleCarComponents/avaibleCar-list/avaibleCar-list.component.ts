@@ -90,14 +90,21 @@ export class AvaibleCarListComponent extends PaginationListComponent {
 }
 booking(id){
   this.book.car = id;
-  //this.book.office = this.officeName;
+  this.book.office = this.officeName;
   this.book.checkInDate = this.checkInDate;
   this.book.checkOutDate = this.checkOutDate;
 
   this.bookingService.createBooking(this.book).subscribe(response => {
     if (Utility.isSuccess(response)) {
-      this.router.navigate(['/cars']);
+      
+    this.confirmService.confirm({message: ` ${id} number of car booked for you ! 
+    Please Keep your car number for payment when you come our office to get your car! `})
+          this.loader.open()
+              this.loader.close();
+              this.refresh();
+             this.router.navigate(['/']);
     }
+   
   });
   }
 }

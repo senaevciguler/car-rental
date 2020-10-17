@@ -86,6 +86,7 @@ export class HomeComponent  extends BaseComponent {
   }
 
   search(){
+
     const model = this.searchForm.value;
     this.router.navigate(['/avaibleCars'], 
     { queryParams: { office: model.office.name, 

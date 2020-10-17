@@ -1,3 +1,5 @@
+import { BookingService } from 'src/app/service/booking.service.';
+import { Booking } from './../../../model/booking.model';
 import { CustomerService } from 'src/app/service/customer.service';
 import { Customer } from 'src/app/model/customer.model';
 import { Component, Inject, OnInit } from '@angular/core';
@@ -19,11 +21,39 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent extends PaginationListComponent {
-  getData(qp: QueryParam) {
-    throw new Error('Method not implemented.');
+  books: Booking[]
+  book:Booking = new Booking();
+  message:String
+  displayedColumns = ['car'];
+  
+  constructor(
+    @Inject(CarService) private carService: CarService, private router:Router,
+    private snack: MatSnackBar,  
+    private confirmService: AppConfirmService,
+    private sanitizer:DomSanitizer,
+    private loader: AppLoaderService,
+    private bookService:BookingService) {
+    super();
+      }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.bookService.listBookings(QueryParam.ALL).subscribe((response) => {
+      this.dataSource = response['payload'];
+    });
   }
+
+  getData(qp: QueryParam) {
+    return this.bookService.listBookings(qp);
+  }
+
   getFilters(): Map<string, any> {
-    throw new Error('Method not implemented.');
+    return new Map()
+      .set('name', this.book.car);
+  }
+
+  actionClear() {
+    this.book = new Booking();
   }
 
 }
