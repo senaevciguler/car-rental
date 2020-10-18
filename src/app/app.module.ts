@@ -1,3 +1,4 @@
+import { LoginService } from './service/login.service';
 import { BookingService } from './service/booking.service.';
 import { AvaibleCarListComponent } from './components/avaibleCarComponents/avaibleCar-list/avaibleCar-list.component';
 import { OfficeService } from './service/office.service';
@@ -54,6 +55,8 @@ import { BookingDetailComponent } from './components/bookingComponents/booking-d
 import { BookingComponent } from './components/bookingComponents/booking/booking.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { CarForUserComponentsComponent } from './components/car-for-user-components/car-for-user-components.component';
+import {LoginComponent} from './components/login/login.component';
+import {HttpIntercepterBasicAuthService} from './service/http/http-intercepter-basic-auth.service';
 
 
 
@@ -80,7 +83,7 @@ import { CarForUserComponentsComponent } from './components/car-for-user-compone
     BookingDetailComponent,
     BookingComponent,
     CarForUserComponentsComponent,
-    
+    LoginComponent
     
      
   ],
@@ -119,11 +122,13 @@ import { CarForUserComponentsComponent } from './components/car-for-user-compone
     MatPaginatorModule,
     MatDialogModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    
 
   ],
-  providers: [CarService,AppConfirmService,AppLoaderService,CustomerService,EmployeeService,OfficeService,BookingService,  
-     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
+  providers: [CarService,AppConfirmService,AppLoaderService,CustomerService,EmployeeService,OfficeService,BookingService,LoginService,
+     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+     {provide: HTTP_INTERCEPTORS, useClass:HttpIntercepterBasicAuthService,multi:true}],
   exports: [RouterModule],
   bootstrap: [AppComponent]
 })

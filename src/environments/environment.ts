@@ -8,6 +8,7 @@ export const environment = {
   development: true,
   environmentName: 'DEV',
   apiURL: 'http://localhost:8080/api/v1'
+  
 };
 
 /*

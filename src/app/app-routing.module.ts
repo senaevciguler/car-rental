@@ -16,10 +16,14 @@ import { OfficeComponent } from './components/officeComponents/office/office.com
 import { ProfileComponent } from './components/profileComponents/profile/profile.component';
 import {BookingDetailComponent} from './components/bookingComponents/booking-detail/booking-detail.component'
 import { CarForUserComponentsComponent } from './components/car-for-user-components/car-for-user-components.component';
+import { LoginComponent } from './components/login/login.component';
+
 
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
+  {path:'login', component:LoginComponent},
+  //{path:'logout', component:LogoutComponent,canActivate:[RouteGuardService]},
   {path:'cars', component:CarListComponent},
   {path:'cars/definition', component:CarComponent},
   {path:'cars/definition/:id', component:CarComponent},
@@ -40,6 +44,7 @@ const routes: Routes = [
   {path:'booking/detail/:id', component:BookingDetailComponent},
   {path:'booking', component:BookingComponent},
   {path:'showCar', component:CarForUserComponentsComponent},
+  {path:'login', component:LoginComponent},
  
 
   {path:'**', component:ErrorComponent}

@@ -35,9 +35,6 @@ export class CustomerComponent extends BaseComponent {
         Validators.minLength(3),
         Validators.maxLength(20)
       ]),
-      customerId: new FormControl(this.customer.customerId,[
-        Validators.required
-      ])
     });
 
     this.isComponentReady = true;
@@ -63,8 +60,7 @@ export class CustomerComponent extends BaseComponent {
     const model = this.customerForm.value;
     this.customer.name = model.name;
     this.customer.lastName = model.lastName;
-    this.customer.customerId = model.customerId;
-    
+
     
     if (Utility.isEmpty(this.customer.id)) {
       this.customerService.createCustomer(this.customer).subscribe(response => {
