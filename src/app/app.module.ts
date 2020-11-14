@@ -1,3 +1,4 @@
+import { LogoutComponent } from './components/logout/logout.component';
 import { LoginService } from './service/login.service';
 import { BookingService } from './service/booking.service.';
 import { AvaibleCarListComponent } from './components/avaibleCarComponents/avaibleCar-list/avaibleCar-list.component';
@@ -83,7 +84,8 @@ import {HttpIntercepterBasicAuthService} from './service/http/http-intercepter-b
     BookingDetailComponent,
     BookingComponent,
     CarForUserComponentsComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
     
      
   ],

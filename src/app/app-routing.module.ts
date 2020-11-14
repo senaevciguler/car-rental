@@ -1,3 +1,4 @@
+import { LogoutComponent } from './components/logout/logout.component';
 import { BookingComponent } from './components/bookingComponents/booking/booking.component';
 import { ProfileDetailComponent } from './components/profileComponents/profile-detail/profile-detail.component';
 import { AvaibleCarListComponent } from './components/avaibleCarComponents/avaibleCar-list/avaibleCar-list.component';
@@ -23,6 +24,7 @@ import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path:'login', component:LoginComponent},
+  {path:'logout', component:LogoutComponent},
   //{path:'logout', component:LogoutComponent,canActivate:[RouteGuardService]},
   {path:'cars', component:CarListComponent},
   {path:'cars/definition', component:CarComponent},

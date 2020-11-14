@@ -5,6 +5,7 @@
         <button mat-button [routerLink]="['/showCar']">Book Car</button>
         <button mat-button [routerLink]="['/offices']">Offices</button>
         <span class="example-spacer"></span> 
+        <span></span>
         <mat-icon>person</mat-icon>
         <button mat-button [matMenuTriggerFor]="adminUserMenu">Admin</button>
     <mat-menu #adminUserMenu="matMenu">
@@ -15,10 +16,12 @@
     <mat-menu #userMenu="matMenu">
       <button mat-menu-item [routerLink]="['/profile']">Profile</button>
     </mat-menu>
-        <button mat-button [routerLink]="['/login']">Logout</button>    
+        <button mat-button *ngIf ="!hardcodeAuthenticationService.isUserLoggedIn()" [routerLink]="['/login']">Login</button>   
+        <button mat-button *ngIf ="hardcodeAuthenticationService.isUserLoggedIn()" [routerLink]="['/logout']">Logout</button>     
         </mat-toolbar-row>
 </mat-toolbar>
 <app-footer></app-footer>
 <div class ="container">
     <router-outlet></router-outlet>
 </div>
+

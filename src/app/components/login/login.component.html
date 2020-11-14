@@ -10,7 +10,7 @@
 <div class ="alert alert-warning" *ngIf ='invalidLogin'>{{errorMessage}}</div>
 <div>
 User Name: <input type="text" name="username"  [(ngModel)]="username">
-Password: <input type="text" name="password"  [(ngModel)]="password">
+Password: <input type="password" name="password"  [(ngModel)]="password">
 
 <button mat-button (click) = handleJWTBasicAuthLogin() class ="btn btn-success">Login</button>
 </div>
